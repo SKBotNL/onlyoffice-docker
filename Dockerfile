@@ -20,8 +20,6 @@ RUN full_ver=$(dpkg -s onlyoffice-documentserver | awk -F': ' '/^Version:/ {prin
 
 RUN sed -i 's/isSupportEditFeature=()=>!1/isSupportEditFeature=()=>!0/g' /var/www/onlyoffice/documentserver/web-apps/apps/*/mobile/dist/js/app.js;
 
-RUN rm -rf /var/www/onlyoffice/$PRODUCT_NAME-example \
-    && rm -rf /etc/onlyoffice/$PRODUCT_NAME-example \
-    && rm -f $DS_SUPERVISOR_CONF \
+RUN rm -rf /var/www/onlyoffice/documentserver-example \
+    && rm -rf /etc/onlyoffice/documentserver-example \
     && rm -f /etc/nginx/includes/ds-example.conf \
-    && ln -s /etc/onlyoffice/$PRODUCT_NAME/supervisor/ds.conf  $DS_SUPERVISOR_CONF
