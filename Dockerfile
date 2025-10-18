@@ -1,4 +1,4 @@
-FROM onlyoffice/documentserver:9.0.4 AS builder
+FROM onlyoffice/documentserver:9.1.0 AS builder
 
 RUN apt-get update && apt-get install -y git nodejs npm
 
@@ -18,7 +18,7 @@ RUN full_ver=$(dpkg -s onlyoffice-documentserver | awk -F': ' '/^Version:/ {prin
     cd ../DocService && npm i && \
     pkg . -t node20-linux --options max_old_space_size=4096 -o docservice
 
-FROM onlyoffice/documentserver:9.0.4 AS documentserver
+FROM onlyoffice/documentserver:9.1.0 AS documentserver
 
 COPY --from=builder /build/server/DocService/docservice /var/www/onlyoffice/documentserver/server/DocService/docservice
 
