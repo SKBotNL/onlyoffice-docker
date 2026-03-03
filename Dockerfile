@@ -1,4 +1,4 @@
-FROM onlyoffice/documentserver:9.3.0 AS builder
+FROM onlyoffice/documentserver:9.3.1 AS builder
 
 RUN apt-get update && apt-get install -y git
 
@@ -30,7 +30,7 @@ RUN \. "$HOME/.nvm/nvm.sh" && \
     cd DocService/ && \
     pkg . -t node20-linux --options max_old_space_size=6144 -o docservice
 
-FROM onlyoffice/documentserver:9.3.0 AS documentserver
+FROM onlyoffice/documentserver:9.3.1 AS documentserver
 
 COPY --from=builder /build/server/DocService/docservice /var/www/onlyoffice/documentserver/server/DocService/docservice
 
